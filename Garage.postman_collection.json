@@ -1,0 +1,122 @@
+{
+	"info": {
+		"_postman_id": "157bf82a-6dc6-4615-8d63-2915264de3fb",
+		"name": "Garage",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "create garage",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "oi",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"location\": {\n\t\t\"longitude\": 12,\n\t\t\"latitude\": 12\n\t}\n}"
+				},
+				"url": {
+					"raw": "localhost:8080/garage",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"garage"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "find by near location",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"url": {
+					"raw": "localhost:8080/garages?lng=12&lat=10&dist=0",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"garages"
+					],
+					"query": [
+						{
+							"key": "lng",
+							"value": "12"
+						},
+						{
+							"key": "lat",
+							"value": "10"
+						},
+						{
+							"key": "dist",
+							"value": "0"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "find by garage id",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"url": {
+					"raw": "http://localhost:8080/garages/5d06f1170bdf45766cc77b19",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"garages",
+						"5d06f1170bdf45766cc77b19"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "find by user id",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"url": {
+					"raw": "http://localhost:8080/garages/user/Bearer oi",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"garages",
+						"user",
+						"Bearer oi"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

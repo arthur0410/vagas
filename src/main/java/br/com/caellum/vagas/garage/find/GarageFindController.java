@@ -11,12 +11,11 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import static org.springframework.http.ResponseEntity.created;
-
 import br.com.caellum.vagas.shared.Garage;
 import br.com.caellum.vagas.shared.Location;
 
 @RestController
+@RequestMapping("/garages")
 class GarageFindController {
 	
 	private final GarageFindService service;
@@ -24,14 +23,26 @@ class GarageFindController {
 	GarageFindController(GarageFindService service) {
 		this.service = service;
 	}
+	
+	@GetMapping("/{id}")
+	ResponseEntity<?> findGarageByGarageId(@PathVariable String id){
+		Optional<Garage> garage = service.findGarageByGarageId(id);
+		return ResponseEntity.ok(garage);
+	}
+	
+	@GetMapping("/user/{id}")
+	ResponseEntity<?> findGaragesByUserId(@PathVariable String id){
+		List<Garage> garages = service.findGaragesByUserId(id);
+		return ResponseEntity.ok(garages);
+	}
 
-	@GetMapping("/garages/{longitude}/{latitude}/{maxDistance}")
+	@GetMapping
 	@ResponseBody
-	ResponseEntity<?> findGarages(@PathVariable Double longitude,
-								  @PathVariable Double latitude,
-								  @PathVariable Double maxDistance) {
+	ResponseEntity<?> findGaragesByLocation(@RequestParam("lng") Double longitude,
+								            @RequestParam("lat") Double latitude,
+								            @RequestParam("dist") Double distance) {
 		Location location = new Location(longitude, latitude);
-		List<Garage> garage = service.findGaragesBy(location, maxDistance);
+		List<Garage> garage = service.findGaragesBy(location, distance);
 		return ResponseEntity.ok(garage);
 	}
 }

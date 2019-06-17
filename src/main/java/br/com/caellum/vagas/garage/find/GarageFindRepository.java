@@ -11,4 +11,6 @@ import br.com.caellum.vagas.shared.Garage;
 interface GarageFindRepository extends MongoRepository<Garage, String> {
 	
 	List<Garage> findByLocationNear(Point center, Distance distance);
+	
+	List<Garage> findByUserId(String userId);
 }
