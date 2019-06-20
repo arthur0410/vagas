@@ -4,11 +4,21 @@
 ```
 systemctl start docker
 docker pull mongo
+```
+
+Create new container:
+```
 docker run -d -p 27017:27017 -p 28017:28017 -e AUTH=no mongo
 ```
+
 Get CONTAINER_ID
 ```
 docker ps -a
+```
+
+Start a container
+```
+docker start {CONTAINER_ID}
 ```
 
 Get ip address of container
